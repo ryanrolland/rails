@@ -264,13 +264,8 @@ class Time
   # We're layering on additional behavior so that ActiveSupport::TimeWithZone instances
   # are coerced into values that Time#- will recognize
   def minus_with_coercion(other)
-    #other = other.comparable_time if other.respond_to?(:comparable_time)
-    #other.is_a?(DateTime) ? to_f - other.to_f : minus_without_coercion(other)
-    first = this.to_date
-    second = other.to_date
-    result = first - second
-    result.to_i
-
+    other = other.comparable_time if other.respond_to?(:comparable_time)
+    other.is_a?(DateTime) ? to_f - other.to_f : minus_without_coercion(other)
   end
   alias_method :minus_without_coercion, :-
   alias_method :-, :minus_with_coercion

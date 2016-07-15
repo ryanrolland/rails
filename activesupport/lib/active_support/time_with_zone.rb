@@ -218,7 +218,11 @@ module ActiveSupport
       # If we're subtracting a Duration of variable length (i.e., years, months, days), move backwards from #time,
       # otherwise move backwards #utc, for accuracy when moving across DST boundaries
       if other.acts_like?(:time)
-        utc.to_f - other.to_f
+        #utc.to_f - other.to_f
+        first = utc.to_date
+        second = other.to_date
+        result = first - second
+        result.to_i
       elsif duration_of_variable_length?(other)
         method_missing(:-, other)
       else
