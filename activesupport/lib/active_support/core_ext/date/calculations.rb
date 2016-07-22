@@ -94,6 +94,8 @@ class Date
   def minus_with_duration(other) #:nodoc:
     if ActiveSupport::Duration === other
       plus_with_duration(-other)
+    elsif ActiveSupport::TimeWithZone === other
+      self.at_beginning_of_day - other
     else
       minus_without_duration(other)
     end
