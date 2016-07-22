@@ -952,7 +952,11 @@ module ActionView
           options["cols"], options["rows"] = size.split("x") if size.respond_to?(:split)
         end
 
-        content_tag("textarea", html_escape(options.delete('value') || value_before_type_cast(object)), options)
+        value = options.delete('value') || value_before_type_cast(object)
+        if value == 'null'
+          value = ''
+        end
+        content_tag("textarea", html_escape(value), options)
       end
 
       def to_check_box_tag(options = {}, checked_value = "1", unchecked_value = "0")
