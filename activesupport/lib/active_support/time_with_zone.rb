@@ -223,6 +223,10 @@ module ActiveSupport
         second = other.to_date
         result = first - second
         result.to_i
+      elsif other.acts_like?(:date)
+        first = utc.to_date
+        result = first - other
+        result.to_i
       elsif duration_of_variable_length?(other)
         method_missing(:-, other)
       else
