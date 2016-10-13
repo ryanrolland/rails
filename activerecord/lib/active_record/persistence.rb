@@ -294,7 +294,7 @@ module ActiveRecord
     def attributes_from_column_definition
       self.class.columns.inject({}) do |attributes, column|
         attributes[column.name] = column.default unless column.name == self.class.primary_key
-        if column.type == :integer
+        if column.type == :integer || column.type == :decimal
           if attributes[column.name] == 0
             attributes[column.name] = nil
           end
