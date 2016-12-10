@@ -64,7 +64,7 @@ module ActionDispatch
         log_error(exception)
 
         request = Request.new(env)
-        if @consider_all_requests_local || request.local?
+        if @consider_all_requests_local
           rescue_action_locally(request, exception)
         else
           rescue_action_in_public(exception)
