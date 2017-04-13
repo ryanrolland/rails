@@ -271,8 +271,8 @@ module ActiveSupport
     #   Time.zone.parse('22:30:00')   # => Fri, 31 Dec 1999 22:30:00 HST -10:00
     def parse(str, now=now)
 
-      if value.include? "/"
-        time = DateTime.strptime(value, "%m/%d/%Y")
+      if str.include? "/"
+        time = DateTime.strptime(str, "%m/%d/%Y")
         ActiveSupport::TimeWithZone.new(nil, self, time)
       else
         date_parts = Date._parse(str)
